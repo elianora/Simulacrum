@@ -3,12 +3,45 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F30B05B3-9979-42BD-9C10-D9F834E825DC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulacrum.API", "src\Simulacrum.API\Simulacrum.API.csproj", "{E5CC8D0D-E1C7-410C-B28A-750F0199FAE1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A65E4E19-CE6A-42EF-998A-38BC82BE535B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Simulacrum.API.Tests", "tests\Simulacrum.API.Tests\Simulacrum.API.Tests.csproj", "{4AEFDB4F-3364-488A-85E4-44CA5C65D4BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0CB33F68-A46E-4A92-AEDA-A028DEC5633E}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		Directory.Build.props = Directory.Build.props
+		Directory.Packages.props = Directory.Packages.props
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E5CC8D0D-E1C7-410C-B28A-750F0199FAE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5CC8D0D-E1C7-410C-B28A-750F0199FAE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5CC8D0D-E1C7-410C-B28A-750F0199FAE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5CC8D0D-E1C7-410C-B28A-750F0199FAE1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AEFDB4F-3364-488A-85E4-44CA5C65D4BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AEFDB4F-3364-488A-85E4-44CA5C65D4BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AEFDB4F-3364-488A-85E4-44CA5C65D4BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AEFDB4F-3364-488A-85E4-44CA5C65D4BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E5CC8D0D-E1C7-410C-B28A-750F0199FAE1} = {F30B05B3-9979-42BD-9C10-D9F834E825DC}
+		{4AEFDB4F-3364-488A-85E4-44CA5C65D4BF} = {A65E4E19-CE6A-42EF-998A-38BC82BE535B}
 	EndGlobalSection
 EndGlobal

@@ -13,5 +13,8 @@
 	<EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
 
 	<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+
+	<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<NoWarn>$(NoWarn),1591</NoWarn>
   </PropertyGroup>
 </Project>
