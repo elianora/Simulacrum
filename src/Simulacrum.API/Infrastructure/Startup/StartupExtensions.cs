@@ -1,8 +1,6 @@
 using System.Globalization;
-using Auth0.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http.Metadata;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
 using Serilog.Exceptions;
@@ -10,6 +8,7 @@ using Serilog.Exceptions.Core;
 using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
 using Serilog.Exceptions.MsSqlServer.Destructurers;
 using Serilog.Exceptions.Refit.Destructurers;
+using Simulacrum.API.Database;
 
 namespace Simulacrum.API.Infrastructure.Startup;
 
@@ -89,30 +88,11 @@ public static class StartupExtensions
 			};
 		});
 
-	public static IEndpointRouteBuilder MapAccountServices(this IEndpointRouteBuilder app)
+	public static IApplicationBuilder InitializeDatabase(this IApplicationBuilder app)
 	{
-		_ = app
-			.MapGet("/Login", async (HttpContext context, string returnUrl = "/") =>
-			{
-				var authenticationProperties = new LoginAuthenticationPropertiesBuilder()
-					.WithRedirectUri(returnUrl)
-					.Build();
-
-				await context.ChallengeAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-			});
-
-		_ = app
-			.MapGet("/Logout", async (HttpContext context, string returnUrl = "/") =>
-			{
-				var authenticationProperties = new LogoutAuthenticationPropertiesBuilder()
-					.WithRedirectUri(returnUrl)
-					.Build();
-
-				await context.SignOutAsync(Auth0Constants.AuthenticationScheme, authenticationProperties);
-				await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-			})
-			.RequireAuthorization();
-
+		using var scope = app.ApplicationServices.CreateScope();
+		var db = scope.ServiceProvider.GetRequiredService<SimulacrumDbContext>();
+		db.Database.Migrate();
 		return app;
 	}
 }

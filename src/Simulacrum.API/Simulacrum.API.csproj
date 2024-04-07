@@ -7,13 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Auth0.AspNetCore.Authentication" />
     <PackageReference Include="AutoRegisterInject" />
     <PackageReference Include="CommunityToolkit.Diagnostics" />
-    <PackageReference Include="DryIoc.dll" />
-    <PackageReference Include="DryIoc.Microsoft.DependencyInjection" />
     <PackageReference Include="Immediate.Apis" />
     <PackageReference Include="Immediate.Handlers" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design">

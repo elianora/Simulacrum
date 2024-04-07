@@ -1,8 +1,9 @@
 using System.Diagnostics;
-using DryIoc;
-using DryIoc.Microsoft.DependencyInjection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Simulacrum.API.Database;
+using Simulacrum.API.Database.Models;
 using Simulacrum.API.Infrastructure.Startup;
 
 Log.Logger = new LoggerConfiguration()
@@ -14,11 +15,12 @@ try
 	var builder = WebApplication.CreateBuilder(args);
 	_ = builder.Configuration.AddJsonFile("secrets.json", optional: true);
 
-	using var container = new Container();
-	_ = builder.Host.UseServiceProviderFactory(new DryIocServiceProviderFactory(container));
-
 	builder.Host.ConfigureSerilog();
 
+	var connectionString = builder.Configuration.GetConnectionString("Default");
+	_ = builder.Services.AddDbContext<SimulacrumDbContext>(o => o.UseSqlServer(connectionString));
+	_ = builder.Services.AddIdentity<User, Role>()
+						.AddEntityFrameworkStores<SimulacrumDbContext>();
 	_ = builder.Services.Configure<ApiBehaviorOptions>(o => o.SuppressConsumesConstraintForFormFileParameters = true);
 	_ = builder.Services.AddHttpContextAccessor();
 	_ = builder.Services.AutoRegisterFromSimulacrumAPI();
@@ -28,6 +30,7 @@ try
 	_ = builder.Services.AddResponseCompression(o => o.EnableForHttps = true);
 
 	var app = builder.Build();
+	_ = app.InitializeDatabase();
 	_ = app.UseHttpsRedirection();
 	_ = app.UseSwagger();
 	_ = app.UseSwaggerUI();
