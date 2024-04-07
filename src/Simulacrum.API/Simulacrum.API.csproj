@@ -7,8 +7,31 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoRegisterInject" />
+    <PackageReference Include="CommunityToolkit.Diagnostics" />
+    <PackageReference Include="Immediate.Apis" />
+    <PackageReference Include="Immediate.Handlers" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" />
+    <PackageReference Include="Riok.Mapperly" />
+    <PackageReference Include="Serilog.AspNetCore" />
+    <PackageReference Include="Serilog.Enrichers.Environment" />
+    <PackageReference Include="Serilog.Enrichers.Thread" />
+    <PackageReference Include="Serilog.Exceptions" />
+    <PackageReference Include="Serilog.Exceptions.EntityFrameworkCore" />
+    <PackageReference Include="Serilog.Exceptions.MsSqlServer" />
+    <PackageReference Include="Serilog.Exceptions.Refit" />
+    <PackageReference Include="Serilog.Sinks.Seq" />
+    <PackageReference Include="SuperLinq" />
     <PackageReference Include="Swashbuckle.AspNetCore" />
+    <PackageReference Include="System.Linq.Async" />
+    <PackageReference Include="Vogen" />
   </ItemGroup>
 
 </Project>
