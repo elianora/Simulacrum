@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -19,8 +21,22 @@ try
 
 	var connectionString = builder.Configuration.GetConnectionString("Default");
 	_ = builder.Services.AddDbContext<SimulacrumDbContext>(o => o.UseSqlServer(connectionString));
-	_ = builder.Services.AddIdentity<User, Role>()
-						.AddEntityFrameworkStores<SimulacrumDbContext>();
+	_ = builder.Services.AddAuthentication(IdentityConstants.ApplicationScheme)
+						.AddIdentityCookies()
+						.ApplicationCookie!.Configure(o => o.Events = new CookieAuthenticationEvents()
+						{
+							OnRedirectToLogin = ctx =>
+							{
+								ctx.Response.StatusCode = 401;
+								return Task.CompletedTask;
+							}
+						});
+
+	_ = builder.Services.AddAuthorizationBuilder();
+	_ = builder.Services.AddIdentityCore<User>()
+						.AddEntityFrameworkStores<SimulacrumDbContext>()
+						.AddApiEndpoints();
+
 	_ = builder.Services.Configure<ApiBehaviorOptions>(o => o.SuppressConsumesConstraintForFormFileParameters = true);
 	_ = builder.Services.AddHttpContextAccessor();
 	_ = builder.Services.AutoRegisterFromSimulacrumAPI();
@@ -31,10 +47,27 @@ try
 
 	var app = builder.Build();
 	_ = app.InitializeDatabase();
-	_ = app.UseHttpsRedirection();
+	_ = app.MapIdentityApi<User>();
+	_ = app.UseDefaultFiles();
+	_ = app.UseStaticFiles();
 	_ = app.UseSwagger();
 	_ = app.UseSwaggerUI();
+	_ = app.UseHttpsRedirection();
+
+	_ = app.MapPost("/logout", async (SignInManager<User> signInManager, [FromBody] object empty) =>
+	{
+		if (empty is not null)
+		{
+			await signInManager.SignOutAsync();
+			return Results.Ok();
+		}
+
+		return Results.NotFound();
+	}).RequireAuthorization();
+
+	_ = app.MapFallbackToFile("/index.html");
 	_ = app.UseRouting();
+	_ = app.UseAuthorization();
 	_ = app.UseAntiforgery();
 	_ = app.UseLogging();
 

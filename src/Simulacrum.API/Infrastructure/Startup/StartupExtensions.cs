@@ -1,5 +1,4 @@
 using System.Globalization;
-using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
@@ -41,35 +40,6 @@ public static class StartupExtensions
 		services.AddSwaggerGen(o =>
 		{
 			o.CustomSchemaIds(t => t.FullName?.Replace('+', '.'));
-
-			o.DocInclusionPredicate((_, api) =>
-				api.ActionDescriptor
-					.EndpointMetadata
-					.OfType<IRouteDiagnosticsMetadata>()
-					.FirstOrDefault()
-					is { Route: var route }
-				&& route.StartsWith("/api", StringComparison.OrdinalIgnoreCase)
-			);
-
-			o.TagActionsBy(api =>
-			{
-				var routeMetadata = api.ActionDescriptor
-					.EndpointMetadata
-					.OfType<IRouteDiagnosticsMetadata>()
-					.FirstOrDefault();
-
-				if (routeMetadata is not { Route: var route })
-					throw new InvalidOperationException("Unable to determine tag for endpoint.");
-
-				var splits = route["/api/".Length..].Split('/');
-				if (splits is not [{ } tag, ..]
-					|| string.IsNullOrWhiteSpace(tag))
-				{
-					throw new InvalidOperationException("Unable to determine tag for endpoint.");
-				}
-
-				return [tag[..1].ToUpperInvariant() + tag[1..]];
-			});
 		});
 
 	public static IApplicationBuilder UseLogging(this IApplicationBuilder app) =>
