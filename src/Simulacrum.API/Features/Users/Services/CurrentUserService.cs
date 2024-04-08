@@ -1,6 +1,8 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Simulacrum.API.Database.Models;
 
 namespace Simulacrum.API.Features.Users.Services;
 
@@ -8,9 +10,21 @@ namespace Simulacrum.API.Features.Users.Services;
 public sealed class CurrentUserService(
 	IAuthorizationService authorizationService,
 	IHttpContextAccessor httpContextAccessor,
+	UserManager<User> userManager,
 	Task<AuthenticationState>? authenticationState = null)
 {
-	public async ValueTask<ClaimsPrincipal?> GetCurrentUser()
+	public async ValueTask<User?> GetCurrentUser()
+	{
+		var claimsPrincipal = await GetClaimsPrincipal();
+		if (claimsPrincipal is null)
+		{
+			return null;
+		}
+
+		return await userManager.GetUserAsync(claimsPrincipal);
+	}
+
+	public async ValueTask<ClaimsPrincipal?> GetClaimsPrincipal()
 	{
 		if (httpContextAccessor.HttpContext is { User: { } user })
 		{
@@ -28,7 +42,7 @@ public sealed class CurrentUserService(
 
 	public async ValueTask<bool> IsAuthorized(string policy)
 	{
-		if (await GetCurrentUser() is not { } user)
+		if (await GetClaimsPrincipal() is not { } user)
 		{
 			return false;
 		}
