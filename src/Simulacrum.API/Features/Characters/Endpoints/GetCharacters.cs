@@ -15,7 +15,7 @@ public static partial class GetCharacters
 {
 	public record Query { }
 
-	public static async ValueTask<IEnumerable<Character>> HandleAsync(
+	private static async ValueTask<IEnumerable<Character>> HandleAsync(
 		Query _,
 		CurrentUserService userService,
 		SimulacrumDbContext dbContext,
@@ -27,11 +27,9 @@ public static partial class GetCharacters
 			return [];
 		}
 
-		var characters = await dbContext.Characters
-										.Where(character => character.UserId == user.Id)
-										.Select(character => new Character())
-										.ToListAsync(cancellationToken);
-
-		return characters;
+		return await dbContext.Characters
+							.Where(character => character.UserId == user.Id)
+							.SelectDto()
+							.ToListAsync(cancellationToken);
 	}
 }

@@ -1,5 +1,6 @@
-﻿namespace Simulacrum.API.Features.Characters.Models;
+namespace Simulacrum.API.Features.Characters.Models;
 
-public class Character
+public sealed record Character
 {
+	public CharacterId CharacterId { get; set; }
 }
