@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
+using Simulacrum.API;
 using Simulacrum.API.Database;
 using Simulacrum.API.Database.Models;
 using Simulacrum.API.Infrastructure.Startup;
@@ -37,6 +38,7 @@ try
 						.AddEntityFrameworkStores<SimulacrumDbContext>()
 						.AddApiEndpoints();
 
+	_ = builder.Services.AddHandlers();
 	_ = builder.Services.Configure<ApiBehaviorOptions>(o => o.SuppressConsumesConstraintForFormFileParameters = true);
 	_ = builder.Services.AddHttpContextAccessor();
 	_ = builder.Services.AutoRegisterFromSimulacrumAPI();
@@ -48,6 +50,7 @@ try
 	var app = builder.Build();
 	_ = app.InitializeDatabase();
 	_ = app.MapIdentityApi<User>();
+	// _ = app.MapSimulacrumAPIEndpoints();
 	_ = app.UseDefaultFiles();
 	_ = app.UseStaticFiles();
 	_ = app.UseSwagger();

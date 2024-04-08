@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="secrets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoRegisterInject" />
     <PackageReference Include="CommunityToolkit.Diagnostics" />
     <PackageReference Include="Immediate.Apis" />
