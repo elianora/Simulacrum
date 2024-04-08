@@ -12,10 +12,10 @@ namespace Simulacrum.API.Features.Users.Endpoints;
 [Authorize]
 public static partial class GetCurrentUser
 {
-	public sealed record UserQuery { }
+	public sealed record Query { }
 
 	private static async ValueTask<User?> HandleAsync(
-		UserQuery _,
+		Query _,
 		CurrentUserService currentUserService,
 		UserManager<User> userManager,
 		CancellationToken __)
