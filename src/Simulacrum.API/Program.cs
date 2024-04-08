@@ -48,6 +48,7 @@ try
 	var app = builder.Build();
 	_ = app.InitializeDatabase();
 	_ = app.MapIdentityApi<User>();
+	_ = app.MapSimulacrumAPIEndpoints();
 	_ = app.UseDefaultFiles();
 	_ = app.UseStaticFiles();
 	_ = app.UseSwagger();
