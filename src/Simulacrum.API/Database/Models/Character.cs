@@ -7,7 +7,7 @@ public class Character
 	public int CharacterId { get; set; }
 
 	public string? CharacterName { get; set; }
-	public string? ClassAndLevel { get; set; }
+	public ICollection<Class> Classes { get; init; } = [];
 	public string? Background { get; set; }
 	public string? PlayerName { get; set; }
 	public string? Race { get; set; }
@@ -49,4 +49,30 @@ public class Character
 	public Skill SleightOfHand { get; set; } = new();
 	public Skill Stealth { get; set; } = new();
 	public Skill Survival { get; set; } = new();
+
+	public int? ArmorClass { get; set; }
+	public int? Initiative { get; set; }
+	public int? Speed { get; set; }
+	public int? HitPointMaximum { get; set; }
+	public int? CurrentHitPoints { get; set; }
+	public int? TemporaryHitPoints { get; set; }
+	public string? HitDice { get; set; }
+	public string? HitDiceTotal { get; set; }
+
+	public DeathSaves DeathSaves { get; set; } = new();
+
+	public string? PersonalityTraits { get; set; }
+	public string? Ideals { get; set; }
+	public string? Bonds { get; set; }
+	public string? Flaws { get; set; }
+
+	public string? OtherProficienciesAndLanguages { get; set; }
+	public string? AttacksAndSpellcasting { get; set; }
+	public int? CopperPieces { get; set; }
+	public int? SilverPieces { get; set; }
+	public int? ElectrumPieces { get; set; }
+	public int? GoldPieces { get; set; }
+	public int? PlatinumPieces { get; set; }
+	public string? Equipment { get; set; }
+	public string? FeaturesAndTraits { get; set; }
 }

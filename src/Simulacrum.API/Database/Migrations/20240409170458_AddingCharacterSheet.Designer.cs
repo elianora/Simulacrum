@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Simulacrum.API.Database;
 
@@ -11,9 +12,11 @@ using Simulacrum.API.Database;
 namespace Simulacrum.API.Database.Migrations
 {
     [DbContext(typeof(SimulacrumDbContext))]
-    partial class SimulacrumDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240409170458_AddingCharacterSheet")]
+    partial class AddingCharacterSheet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

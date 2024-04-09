@@ -18,6 +18,7 @@ public class SimulacrumDbContext(DbContextOptions<SimulacrumDbContext> options) 
 			.HasForeignKey(character => character.UserId);
 
 		_ = builder.Entity<Character>()
+			.OwnsMany(character => character.Classes, ownedBuilder => ownedBuilder.ToJson())
 			.OwnsOne(character => character.CharismaSavingThrow, ownedBuilder => ownedBuilder.ToJson())
 			.OwnsOne(character => character.ConstitutionSavingThrow, ownedBuilder => ownedBuilder.ToJson())
 			.OwnsOne(character => character.DexteritySavingThrow, ownedBuilder => ownedBuilder.ToJson())
@@ -41,6 +42,7 @@ public class SimulacrumDbContext(DbContextOptions<SimulacrumDbContext> options) 
 			.OwnsOne(character => character.Religion, ownedBuilder => ownedBuilder.ToJson())
 			.OwnsOne(character => character.SleightOfHand, ownedBuilder => ownedBuilder.ToJson())
 			.OwnsOne(character => character.Stealth, ownedBuilder => ownedBuilder.ToJson())
-			.OwnsOne(character => character.Survival, ownedBuilder => ownedBuilder.ToJson());
+			.OwnsOne(character => character.Survival, ownedBuilder => ownedBuilder.ToJson())
+			.OwnsOne(character => character.DeathSaves, ownedBuilder => ownedBuilder.ToJson());
 	}
 }
