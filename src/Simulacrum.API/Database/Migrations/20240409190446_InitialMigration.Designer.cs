@@ -12,8 +12,8 @@ using Simulacrum.API.Database;
 namespace Simulacrum.API.Database.Migrations
 {
     [DbContext(typeof(SimulacrumDbContext))]
-    [Migration("20240409170458_AddingCharacterSheet")]
-    partial class AddingCharacterSheet
+    [Migration("20240409190446_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
