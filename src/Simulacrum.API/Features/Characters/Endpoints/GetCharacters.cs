@@ -13,7 +13,7 @@ namespace Simulacrum.API.Features.Characters.Endpoints;
 [Authorize]
 public static partial class GetCharacters
 {
-	public record Query { }
+	public sealed record Query { }
 
 	private static async ValueTask<IEnumerable<Character>> HandleAsync(
 		Query _,
@@ -27,9 +27,12 @@ public static partial class GetCharacters
 			return [];
 		}
 
-		return await dbContext.Characters
+		// TODO: Why does this not work with the IQueryable .SelectDto extension?
+		var results = await dbContext.Characters
 							.Where(character => character.UserId == user.Id)
-							.SelectDto()
+							//.SelectDto()
 							.ToListAsync(cancellationToken);
+
+		return results.Select(res => res.ToDto());
 	}
 }

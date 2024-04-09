@@ -9,14 +9,14 @@
     <PackageVersion Include="DryIoc.dll" Version="5.4.3" />
     <PackageVersion Include="DryIoc.Microsoft.DependencyInjection" Version="6.2.0" />
     <PackageVersion Include="Immediate.Apis" Version="0.6.0" />
-    <PackageVersion Include="Immediate.Handlers" Version="1.3.0" />
-    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.3" />
-    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.3" />
+    <PackageVersion Include="Immediate.Handlers" Version="1.3.1" />
+    <PackageVersion Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.4" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.4" />
     <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.1" />
-    <PackageVersion Include="Riok.Mapperly" Version="3.4.0" />
+    <PackageVersion Include="Riok.Mapperly" Version="3.5.0" />
     <PackageVersion Include="Serilog.AspNetCore" Version="8.0.1" />
     <PackageVersion Include="Serilog.Enrichers.Environment" Version="2.3.0" />
     <PackageVersion Include="Serilog.Enrichers.Thread" Version="3.1.0" />
