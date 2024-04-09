@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Simulacrum.API.Features.Characters.Models;
 
 public sealed record Character
@@ -5,7 +7,11 @@ public sealed record Character
 	public CharacterId CharacterId { get; set; }
 
 	public Name CharacterName { get; set; }
-	public ICollection<Class> Classes { get; init; } = [];
+
+	// Suppress this because we need it to be deep cloneable
+	[SuppressMessage("Usage", "CA2227: Collection properties should be read only")]
+	public ICollection<Class> Classes { get; set; } = [];
+
 	public Background Background { get; set; }
 	public Name PlayerName { get; set; }
 	public Race Race { get; set; }
