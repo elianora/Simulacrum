@@ -28,11 +28,10 @@ public static partial class GetCharacters
 		}
 
 		// TODO: Why does this not work with the IQueryable .SelectDto extension?
-		var results = await dbContext.Characters
-							.Where(character => character.UserId == user.Id)
-							//.SelectDto()
-							.ToListAsync(cancellationToken);
-
-		return results.Select(res => res.ToDto());
+		return await dbContext.Characters
+						.Where(character => character.UserId == user.Id)
+						//.SelectDto()
+						.Select(character => character.ToDto())
+						.ToListAsync(cancellationToken);
 	}
 }
