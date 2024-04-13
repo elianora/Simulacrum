@@ -1,5 +1,6 @@
 using Immediate.Apis.Shared;
 using Immediate.Handlers.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Simulacrum.API.Database;
 using Simulacrum.API.Features.Users.Services;
@@ -8,6 +9,7 @@ namespace Simulacrum.API.Features.Characters.Endpoints;
 
 [Handler]
 [MapDelete("/api/characters/delete")]
+[Authorize]
 public static partial class DeleteCharacter
 {
 	public sealed record Query
