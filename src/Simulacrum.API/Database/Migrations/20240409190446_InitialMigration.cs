@@ -157,6 +157,86 @@ public partial class InitialMigration : Migration
 					onDelete: ReferentialAction.Cascade);
 			});
 
+		_ = migrationBuilder.CreateTable(
+			name: "Characters",
+			columns: table => new
+			{
+				CharacterId = table.Column<int>(type: "int", nullable: false)
+					.Annotation("SqlServer:Identity", "1, 1"),
+				UserId = table.Column<int>(type: "int", nullable: false),
+				CharacterName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Background = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				PlayerName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Race = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Alignment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				ExperiencePoints = table.Column<int>(type: "int", nullable: true),
+				Strength = table.Column<int>(type: "int", nullable: true),
+				Dexterity = table.Column<int>(type: "int", nullable: true),
+				Constitution = table.Column<int>(type: "int", nullable: true),
+				Intelligence = table.Column<int>(type: "int", nullable: true),
+				Wisdom = table.Column<int>(type: "int", nullable: true),
+				Charisma = table.Column<int>(type: "int", nullable: true),
+				ProficiencyBonus = table.Column<int>(type: "int", nullable: true),
+				JackOfAllTrades = table.Column<bool>(type: "bit", nullable: false),
+				ArmorClass = table.Column<int>(type: "int", nullable: true),
+				Initiative = table.Column<int>(type: "int", nullable: true),
+				Speed = table.Column<int>(type: "int", nullable: true),
+				HitPointMaximum = table.Column<int>(type: "int", nullable: true),
+				CurrentHitPoints = table.Column<int>(type: "int", nullable: true),
+				TemporaryHitPoints = table.Column<int>(type: "int", nullable: true),
+				HitDice = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				HitDiceTotal = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				PersonalityTraits = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Ideals = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Bonds = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Flaws = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				OtherProficienciesAndLanguages = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				AttacksAndSpellcasting = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				CopperPieces = table.Column<int>(type: "int", nullable: true),
+				SilverPieces = table.Column<int>(type: "int", nullable: true),
+				ElectrumPieces = table.Column<int>(type: "int", nullable: true),
+				GoldPieces = table.Column<int>(type: "int", nullable: true),
+				PlatinumPieces = table.Column<int>(type: "int", nullable: true),
+				Equipment = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				FeaturesAndTraits = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				Acrobatics = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				AnimalHandling = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Arcana = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Athletics = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				CharismaSavingThrow = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Classes = table.Column<string>(type: "nvarchar(max)", nullable: true),
+				ConstitutionSavingThrow = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				DeathSaves = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Deception = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				DexteritySavingThrow = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				History = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Insight = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				IntelligenceSavingThrow = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Intimidation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Investigation = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Medicine = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Nature = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Perception = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Performance = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Persuasion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Religion = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				SleightOfHand = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Stealth = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				StrengthSavingThrow = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				Survival = table.Column<string>(type: "nvarchar(max)", nullable: false),
+				WisdomSavingThrow = table.Column<string>(type: "nvarchar(max)", nullable: false)
+			},
+			constraints: table =>
+			{
+				_ = table.PrimaryKey("PK_Characters", x => x.CharacterId);
+				_ = table.ForeignKey(
+					name: "FK_Characters_AspNetUsers_UserId",
+					column: x => x.UserId,
+					principalTable: "AspNetUsers",
+					principalColumn: "Id",
+					onDelete: ReferentialAction.Cascade);
+			});
+
 		_ = migrationBuilder.CreateIndex(
 			name: "IX_AspNetRoleClaims_RoleId",
 			table: "AspNetRoleClaims",
@@ -195,6 +275,11 @@ public partial class InitialMigration : Migration
 			column: "NormalizedUserName",
 			unique: true,
 			filter: "[NormalizedUserName] IS NOT NULL");
+
+		_ = migrationBuilder.CreateIndex(
+			name: "IX_Characters_UserId",
+			table: "Characters",
+			column: "UserId");
 	}
 
 	/// <inheritdoc />
@@ -214,6 +299,9 @@ public partial class InitialMigration : Migration
 
 		_ = migrationBuilder.DropTable(
 			name: "AspNetUserTokens");
+
+		_ = migrationBuilder.DropTable(
+			name: "Characters");
 
 		_ = migrationBuilder.DropTable(
 			name: "AspNetRoles");
