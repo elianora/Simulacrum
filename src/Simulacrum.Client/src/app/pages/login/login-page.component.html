@@ -1,0 +1,13 @@
+<form *ngIf="loginForm" [formGroup]="loginForm" (submit)="login($event)">
+  <div>
+    <label for="email">Email:</label>
+    <input name="email" formControlName="email" type="text" />
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input name="password" formControlName="password" type="password" />
+  </div>
+  <div>
+    <button [disabled]="!loginForm.valid" type="submit">Login</button>
+  </div>
+</form>
