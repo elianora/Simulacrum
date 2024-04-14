@@ -4,6 +4,7 @@ import { LoginPageComponent } from './pages/login/login-page.component';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { AuthGuard } from './core/identity/auth.guard';
 import { RegisterPageComponent } from './pages/register/register-page.component';
+import { LogoutPageComponent } from './pages/logout/logout-page.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,11 @@ const routes: Routes = [
     path: 'home',
     canActivate: mapToCanActivate([AuthGuard]),
     component: HomePageComponent
+  },
+  {
+    path: 'logout',
+    canActivate: mapToCanActivate([AuthGuard]),
+    component: LogoutPageComponent
   },
   {
     path: 'login',
