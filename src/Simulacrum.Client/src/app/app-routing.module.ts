@@ -3,6 +3,7 @@ import { RouterModule, Routes, mapToCanActivate } from '@angular/router';
 import { LoginPageComponent } from './pages/login/login-page.component';
 import { HomePageComponent } from './pages/home/home-page.component';
 import { AuthGuard } from './core/identity/auth.guard';
+import { RegisterPageComponent } from './pages/register/register-page.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginPageComponent
+  },
+  {
+    path: 'register',
+    component: RegisterPageComponent
   }
 ];
 
